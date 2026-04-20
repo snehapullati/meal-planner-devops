@@ -33,4 +33,4 @@ def result():
     return f"<h1>{result}</h1><a href='/'>Go Back</a>"
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)
