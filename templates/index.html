@@ -9,54 +9,63 @@
 
 <form action="/result" method="post">
 
-    <!-- Person 1 -->
-    <h3>Person 1</h3>
-    Eat? 
-    <input type="radio" name="eat1" value="yes"> Yes
-    <input type="radio" name="eat1" value="no"> No <br>
+    <div id="peopleContainer"></div>
 
-    Food:
-    <select name="food1">
-        <option value="veg">Veg</option>
-        <option value="nonveg">Non-Veg</option>
-    </select>
-
-    <hr>
-
-    <!-- Repeat for 4 people -->
-
-    <h3>Person 2</h3>
-    <input type="radio" name="eat2" value="yes"> Yes
-    <input type="radio" name="eat2" value="no"> No <br>
-    <select name="food2">
-        <option value="veg">Veg</option>
-        <option value="nonveg">Non-Veg</option>
-    </select>
-
-    <hr>
-
-    <h3>Person 3</h3>
-    <input type="radio" name="eat3" value="yes"> Yes
-    <input type="radio" name="eat3" value="no"> No <br>
-    <select name="food3">
-        <option value="veg">Veg</option>
-        <option value="nonveg">Non-Veg</option>
-    </select>
-
-    <hr>
-
-    <h3>Person 4</h3>
-    <input type="radio" name="eat4" value="yes"> Yes
-    <input type="radio" name="eat4" value="no"> No <br>
-    <select name="food4">
-        <option value="veg">Veg</option>
-        <option value="nonveg">Non-Veg</option>
-    </select>
+    <button type="button" onclick="addPerson()">Add Person</button>
 
     <br><br>
     <button type="submit">Get Meal Suggestion</button>
 
 </form>
+
+<script>
+let count = 0;
+
+function addPerson() {
+    count++;
+
+    const div = document.createElement("div");
+
+    div.innerHTML = `
+        <h3>Person ${count}</h3>
+
+        Name:
+        <input type="text" name="name${count}" required><br>
+
+        Eat?
+        <input type="radio" name="eat${count}" value="yes" onclick="toggleFood(${count})"> Yes
+        <input type="radio" name="eat${count}" value="no" onclick="toggleFood(${count})"> No <br>
+
+        Food:
+        <select name="food${count}" id="food${count}" disabled>
+            <option value="veg">Veg</option>
+            <option value="nonveg">Non-Veg</option>
+        </select>
+
+        <hr>
+    `;
+
+    document.getElementById("peopleContainer").appendChild(div);
+}
+
+function toggleFood(id) {
+    const eatYes = document.querySelector(`input[name="eat${id}"][value="yes"]`);
+    const food = document.getElementById(`food${id}`);
+
+    if (eatYes.checked) {
+        food.disabled = false;
+    } else {
+        food.disabled = true;
+    }
+}
+
+// Auto add 4 people initially
+window.onload = function() {
+    for (let i = 0; i < 4; i++) {
+        addPerson();
+    }
+};
+</script>
 
 </body>
 </html>

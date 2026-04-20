@@ -13,15 +13,17 @@ def result():
     veg_count = 0
     nonveg_count = 0
 
-    for i in range(1, 5):
-        eat = choices.get(f'eat{i}')
-        food = choices.get(f'food{i}')
+    for key in choices:
+        if "eat" in key:
+            person_id = key.replace("eat", "")
+            eat = choices.get(f'eat{person_id}')
+            food = choices.get(f'food{person_id}')
 
-        if eat == 'yes':
-            if food == 'veg':
-                veg_count += 1
-            elif food == 'nonveg':
-                nonveg_count += 1
+            if eat == 'yes':
+                if food == 'veg':
+                    veg_count += 1
+                elif food == 'nonveg':
+                    nonveg_count += 1
 
     if veg_count > nonveg_count:
         result = "Cook Veg Today 🥦"
