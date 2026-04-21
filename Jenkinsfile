@@ -4,10 +4,10 @@ pipeline {
     stages {
 
         stage('Clone') {
-            steps {
-                git 'https://github.com/snehapullati/meal-planner-devops.git'
-            }
-        }
+    steps {
+        sh 'git clone https://github.com/snehapullati/meal-planner-devops.git'
+    }
+}
 
         stage('Build Docker Image') {
             steps {
