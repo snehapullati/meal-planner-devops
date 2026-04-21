@@ -9,12 +9,6 @@ pipeline {
             }
         }
 
-        stage('Clone') {
-            steps {
-                git 'https://github.com/snehapullati/meal-planner-devops.git'
-            }
-        }
-
         stage('Build Docker') {
             steps {
                 sh 'docker build -t meal-app .'
